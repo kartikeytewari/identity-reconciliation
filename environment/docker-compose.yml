@@ -1,0 +1,19 @@
+version: '2'
+services:
+  web:
+    build: ../server/
+    command: python3 app.py 
+    volumes:
+      - ../server/:/usr/src/app/
+    ports:
+      - "5002:5002"
+    depends_on:
+      - postgres
+    environment:
+      DATABASE_URL: postgres://db_user@postgres/customer_data
+  postgres:
+    image: postgres:latest
+    environment:
+      - POSTGRES_DB=${POSTGRES_DB}
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
