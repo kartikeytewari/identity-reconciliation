@@ -5,3 +5,9 @@
 ## Tech Stack: 
 - Node JS
 - Express JS
+
+# PSQL commands:
+```sql
+- psql -U postgres
+- \c customer_data
+```

@@ -1,6 +1,25 @@
+import psycopg2
 from flask import Flask, request
 
 app = Flask(__name__)
+
+def get_connection():
+    try:
+        print ("establising connection")
+        val = psycopg2.connect("postgresql://postgres:password@localhost:5432/customer_data")
+        print ("val = ", val)
+        return val
+    except:
+        return False
+
+
+conn = get_connection()
+ 
+if conn:
+    print("Connection to the PostgreSQL established successfully.")
+else:
+    print ("conn = ", conn)
+    print("Connection to the PostgreSQL encountered and error.")
 
 @app.route("/", methods=["GET"])
 def landing_page():
