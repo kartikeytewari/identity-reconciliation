@@ -1,6 +1,7 @@
 import psycopg2
 import time
 from flask import Flask, request
+import os
 
 app = Flask(__name__)
 
@@ -8,11 +9,11 @@ def get_connection():
     print ("establising connection")
     try:
         val = psycopg2.connect(
-            dbname="customer_data", 
-            user="postgres", 
-            password="password", 
-            host="192.168.1.10",
-            port="5432"
+            dbname=os.environ.get(POSTGRES_DB),
+            user=os.environ.get(POSTGRES_USER), 
+            password=os.environ.get(POSTGRES_USER), 
+            host=os.environ.get(HOST_IP),
+            port=os.environ.get(POSTGRES_PORT)
         )
         return val
     except (Exception, psycopg2.Error) as error:
