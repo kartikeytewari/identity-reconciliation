@@ -5,33 +5,26 @@ from flask import Flask, request
 app = Flask(__name__)
 
 def get_connection():
+    print ("establising connection")
     try:
-        print ("establising connection")
-        # val = psycopg2.connect("postgresql://postgres:password@localhost:5432/customer_data")
-        try:
-            val = psycopg2.connect(
-                dbname="customer_data", 
-                user="postgres", 
-                password="password", 
-                host="192.168.1.10", 
-                port="5432"
-            )
-        except (Exception, psycopg2.Error) as error:
-            print ("Error: ", error)
+        val = psycopg2.connect(
+            dbname="customer_data", 
+            user="postgres", 
+            password="password", 
+            host="192.168.1.10",
+            port="5432"
+        )
         return val
-    except:
+    except (Exception, psycopg2.Error) as error:
+        print ("Error: ", error)
         return False
 
 
-print ("-" * 8)
 conn = get_connection()
-print ("timestamp = ", int(time.time()))
 if conn:
-    print("Connection to the PostgreSQL established successfully.")
+    print("Connection to PSQL DB successful")
 else:
-    print ("conn = ", conn)
-    print("Connection to the PostgreSQL encountered and error.")
-print ("-" * 8)
+    print(f"Connection to PSQL DB failed with error: {conn}")
 
 @app.route("/", methods=["GET"])
 def landing_page():
