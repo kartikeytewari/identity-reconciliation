@@ -261,5 +261,5 @@ pyrightconfig.json
 
 # End of https://www.toptal.com/developers/gitignore/api/python,flask
 
-# dev files
-environment/local.env
+# config file
+config/local.env
