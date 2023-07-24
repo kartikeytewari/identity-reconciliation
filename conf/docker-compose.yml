@@ -7,6 +7,12 @@ services:
       - ../server/:/usr/src/app/
     ports:
       - "5002:5002"
+    environment:
+      - POSTGRES_DB
+      - POSTGRES_USER
+      - POSTGRES_PASSWORD
+      - HOST_IP
+      - POSTGRES_PORT
     depends_on:
       postgres:
         condition: service_healthy
@@ -14,9 +20,9 @@ services:
   postgres:
     image: postgres:latest
     environment:
-      POSTGRES_DB: customer_data
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: password
+      - POSTGRES_DB
+      - POSTGRES_USER
+      - POSTGRES_PASSWORD
     build: ../database
     ports:
       - "5432:5432"
