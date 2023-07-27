@@ -1,7 +1,8 @@
-import psycopg2
 import time
-from flask import Flask, request
 import os
+from flask import Flask, request
+import psycopg2
+from reconcile import *
 
 app = Flask(__name__)
 
@@ -20,7 +21,6 @@ def get_connection():
         print ("Error: ", error)
         return False
 
-
 conn = get_connection()
 if conn:
     print("Connection to PSQL DB successful")
@@ -34,18 +34,11 @@ def landing_page():
 @app.route("/identify", methods=["POST"])
 def reconciliation():
     payload = request.json
-    no_data_flag = True
-    if ("email" in payload):
-        no_data_flag = False
-        print ("payload has email")
-        print (payload["email"])
-    if ("phoneNumber" in payload):
-        no_data_flag = False
-        print ("payload has phone_number")
-        print (payload["phoneNumber"])
-    if (no_data_flag):
-        print ("nothing present")
-    return "hello"
+    if ("email" in payload) and ("phoneNumber" in payload):
+        store_data(conn, payload["email"], payload["phoneNumber"])
+        return f'payload has email: {payload["email"]} and phoneNumber: {payload["phoneNumber"]}'
+    else:
+        return "Insufficient data"
 
 if __name__=="__main__":
     app.run(debug=True, host="0.0.0.0", port=5002)
