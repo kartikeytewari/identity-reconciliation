@@ -11,3 +11,6 @@
 - psql -U postgres
 - \c customer_data
 ```
+
+# Run service with environment file:
+- Local run: `docker-compose --local-env local.env up`
