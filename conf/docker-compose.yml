@@ -1,5 +1,7 @@
 version: '2'
+
 services:
+  # backend code
   identity-reconcilation-backend:
     build: ../server/
     command: python3 app.py 
@@ -17,6 +19,7 @@ services:
       postgres:
         condition: service_healthy
 
+  # psql database
   postgres:
     image: postgres:latest
     environment:
@@ -29,5 +32,12 @@ services:
     healthcheck:
       test: ["CMD-SHELL", "sh -c 'pg_isready -U postgres -d customer_data'"]
       interval: 10s
-      timeout: 5s
+      timeout: 2s
       retries: 3
+    volumes:
+      - iden_reco_volume:/var/lib/postgresql/data
+
+volumes:
+  # psql database volume
+  iden_reco_volume:
+    external: true
