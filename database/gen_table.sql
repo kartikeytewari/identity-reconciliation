@@ -1,5 +1,11 @@
-CREATE TABLE Contact (
-    ID INT NOT NULL,
+-- install extension for UUID 
+create extension pg_trgm;
+select * FROM pg_extension;
+CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+
+-- create a table contact 
+CREATE TABLE contact (
+    ID uuid default uuid_generate_v4(),
     PHONE_NUMBER VARCHAR(10),
     EMAIL VARCHAR(255),
     LINKED_ID INT,
