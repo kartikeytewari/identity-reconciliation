@@ -12,5 +12,7 @@
 - \c customer_data
 ```
 
-# Run service with environment file:
-- Local run: `docker-compose --local-env local.env up`
+# Build and run service:
+- create volume: `docker volume create iden_reco_volume`
+- Build image: `docker compose build`
+- Local run: `docker compose --env-file local.env up`
