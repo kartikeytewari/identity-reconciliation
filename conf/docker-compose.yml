@@ -35,9 +35,9 @@ services:
       timeout: 2s
       retries: 3
     volumes:
-      - iden_reco_volume:/var/lib/postgresql/data
+      - identity_reconcil_psql:/var/lib/postgresql/data
 
 volumes:
   # psql database volume
-  iden_reco_volume:
+  identity_reconcil_psql:
     external: true
