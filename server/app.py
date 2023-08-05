@@ -35,8 +35,8 @@ def landing_page():
 def reconciliation():
     payload = request.json
     if ("email" in payload) and ("phoneNumber" in payload):
-        store_data(conn, payload["email"], payload["phoneNumber"])
-        return f'payload has email: {payload["email"]} and phoneNumber: {payload["phoneNumber"]}'
+        contact_directory = store_data(conn, payload["email"], payload["phoneNumber"])
+        return contact_directory
     else:
         return "Insufficient data"
 

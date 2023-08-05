@@ -1,6 +1,7 @@
 import uuid
 import psycopg2
 import operator
+import json
 from datetime import datetime
 from dataclasses import dataclass
 
@@ -10,32 +11,82 @@ class contact_detail:
     linked_id: str = None
     link_preference: str = None
     created_at: datetime = None
+    email: str = None
+    phone_number: str = None
 
-def store_data(conn, email, phone_number):
-    created_at = str(datetime.now())
-    updated_at = str(datetime.now())
-    
+def multiple_contact_resp(primary_candidate):
+
+    secondary_email_dir = set()
+    secondary_phone_number_dir = set()
+    secondary_contact_id_dir = set()
+
+    primary_email = ""
+    primary_phone_number = ""
+
+    for local_contact in primary_candidate:
+        if (local_contact.link_preference == "PRIMARY"):
+            primary_email = local_contact.email
+            primary_phone_number = local_contact.phone_number
+        else:
+            secondary_email_dir.add(local_contact.email)
+            secondary_phone_number_dir.add(local_contact.phone_number)
+            secondary_contact_id_dir.add(local_contact.id)
+
+    if (primary_email in secondary_email_dir):
+        secondary_email_dir.remove(primary_email)
+
+    if (primary_phone_number in secondary_phone_number_dir):
+        secondary_phone_number_dir.remove(primary_phone_number)
+
+    val = {
+        "contact": {
+            "primaryContatctId": primary_candidate[0].id,
+            "emails": [primary_email] + list(secondary_email_dir),
+            "phoneNumbers": [primary_phone_number] + list(secondary_phone_number_dir),
+            "secondaryContactIds": list(secondary_contact_id_dir)
+        }
+    }
+
+    return json.dumps(val)
+
+def get_contact(cursor, email, phone_number):
     # find all matching candidates
     query_link = f"select id, linked_id, link_preference, created_at, email, phone_number from contact where phone_number = '{phone_number}' or email = '{email}';"
-    cursor = conn.cursor()
     cursor.execute(query_link)
     same_contact = cursor.fetchall()
+
+    primary_linked_id = same_contact[0][1]
+    query_link = f"select id, linked_id, link_preference, created_at, email, phone_number from contact where linked_id = '{primary_linked_id}' or id = '{primary_linked_id}';"
+
+    cursor.execute(query_link)
+    same_contact += cursor.fetchall()
 
     primary_candidate = []
     for local_val in same_contact:
         temp = contact_detail()
-
-        # check for same contact set
-        if (local_val[4] == email) and (local_val[5] == phone_number):
-            return
-            
         temp.id = local_val[0]
         temp.linked_id = local_val[1]
         temp.link_preference = local_val[2]
         temp.created_at = local_val[3]
+        temp.email = local_val[4]
+        temp.phone_number = local_val[5]
         primary_candidate.append(temp)
 
     primary_candidate.sort(key=operator.attrgetter('created_at'))
+    return primary_candidate
+    
+def store_data(conn, email, phone_number):
+    created_at = str(datetime.now())
+    updated_at = str(datetime.now())
+    
+    cursor = conn.cursor()
+    primary_candidate = get_contact(cursor, email, phone_number)
+
+    # check for same contact set
+    for local_contact in primary_candidate:
+        if (local_contact.email == email) and (local_contact.phone_number == phone_number):
+            return multiple_contact_resp(primary_candidate)
+
     query_write_local_contact = ""
     if (len(primary_candidate) == 0):
         # new customer
@@ -58,3 +109,6 @@ def store_data(conn, email, phone_number):
     
     cursor.execute(query_write_local_contact)
     conn.commit()
+
+    primary_candidate = get_contact(cursor, email, phone_number)
+    return multiple_contact_resp(primary_candidate)
