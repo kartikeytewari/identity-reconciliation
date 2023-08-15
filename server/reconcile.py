@@ -55,11 +55,11 @@ def get_contact(cursor, email, phone_number):
     cursor.execute(query_link)
     same_contact = cursor.fetchall()
 
-    primary_linked_id = same_contact[0][1]
-    query_link = f"select id, linked_id, link_preference, created_at, email, phone_number from contact where linked_id = '{primary_linked_id}' or id = '{primary_linked_id}';"
-
-    cursor.execute(query_link)
-    same_contact += cursor.fetchall()
+    if (len(same_contact) != 0):
+        primary_linked_id = same_contact[0][0]
+        query_link = f"select id, linked_id, link_preference, created_at, email, phone_number from contact where linked_id = '{primary_linked_id}' or id = '{primary_linked_id}';"
+        cursor.execute(query_link)
+        same_contact += cursor.fetchall()
 
     primary_candidate = []
     for local_val in same_contact:
@@ -100,7 +100,7 @@ def store_data(conn, email, phone_number):
             primary_hash = primary_candidate[0].id
 
         for i in range(1,len(primary_candidate)):
-            if (primary_candidate[i].link_preference != "SECONDARY") or (primary_candidate[i].linked_id != primary_hash):
+            if (primary_candidate[i].id != primary_hash) and ((primary_candidate[i].link_preference == "PRIMARY") or (primary_candidate[i].linked_id != primary_hash)):
                 query_update = f"update contact set link_preference = 'SECONDARY', linked_id = '{primary_hash}' where id='{primary_candidate[i].id}';"
                 cursor.execute(query_update)
                 conn.commit()
