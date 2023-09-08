@@ -3,7 +3,7 @@ version: '2'
 services:
   # backend code
   identity-reconcilation-backend:
-    image: ghcr.io/kartikeytewari/identity-reconcilation-backend
+    image: identity-reconcilation-backend
     build: ../server/
     command: python3 app.py 
     volumes:
@@ -40,11 +40,11 @@ services:
       timeout: 2s
       retries: 3
     volumes:
-      - identity_reconcil_psql:/var/lib/postgresql/data
+      - ir_psql:/var/lib/postgresql/data
 
 volumes:
   # psql database volume
-  identity_reconcil_psql:
+  ir_psql:
     external: true
 
 networks:
