@@ -5,7 +5,6 @@ services:
   identity-reconcilation-backend:
     image: identity-reconcilation-backend
     build: ../server/
-    command: python3 app.py 
     volumes:
       - ../server/:/usr/src/app/
     ports:
