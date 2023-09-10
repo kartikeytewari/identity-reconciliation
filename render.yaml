@@ -32,3 +32,19 @@ services:
         envVarGroups: identity-reconciliation
       - key: PYTHONUNBUFFERED
         envVarGroups: identity-reconciliation
+
+envVarGroups:
+- name: identity-reconciliation
+  envVars:
+    - key: POSTGRES_DB
+      generateValue: true
+    - key: POSTGRES_USER
+      generateValue: true
+    - key: POSTGRES_PASSWORD
+      generateValue: true
+    - key: POSTGRES_HOST
+      generateValue: true
+    - key: POSTGRES_PORT
+      generateValue: true
+    - key: PYTHONUNBUFFERED
+      generateValue: true
