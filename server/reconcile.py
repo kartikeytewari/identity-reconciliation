@@ -55,11 +55,19 @@ def get_contact(cursor, email, phone_number):
     cursor.execute(query_link)
     same_contact = cursor.fetchall()
 
-    if (len(same_contact) != 0):
-        primary_linked_id = same_contact[0][0]
-        query_link = f"select id, linked_id, link_preference, created_at, email, phone_number from contact where linked_id = '{primary_linked_id}' or id = '{primary_linked_id}';"
-        cursor.execute(query_link)
-        same_contact += cursor.fetchall()
+
+    for local_contact in same_contact:
+        local_contact_type = local_contact[2]
+        query_link = ""
+        if (local_contact_type == "PRIMARY"):
+            local_contact_id = local_contact[0]
+            query_link = f"select id, linked_id, link_preference, created_at, email, phone_number from contact where linked_id = '{local_contact_id}';"
+        else:
+            local_contact_primary_id = local_contact[1]
+            query_link = f"select id, linked_id, link_preference, created_at, email, phone_number from contact where linked_id = '{local_contact_primary_id}' or id = '{local_contact_primary_id}';"
+        
+    cursor.execute(query_link)
+    same_contact += cursor.fetchall()
 
     primary_candidate = []
     for local_val in same_contact:
