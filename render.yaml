@@ -1,0 +1,24 @@
+services:
+  - type: web 
+    name: identity-reconcilation-backend
+    runtime: docker
+    rootDir: server
+    healthCheckPath: /
+    envVars:
+      - key: POSTGRES_DB
+      - key: POSTGRES_USER
+      - key: POSTGRES_PASSWORD
+      - key: POSTGRES_HOST
+      - key: POSTGRES_PORT
+      - key: PYTHONUNBUFFERED
+    
+  - type: web
+    name: postgres
+    runtime: docker
+    rootDir: database
+    healthCheckPath: /
+    envVars:
+      - key: POSTGRES_DB
+      - key: POSTGRES_USER
+      - key: POSTGRES_PASSWORD
+      - key: PYTHONUNBUFFERED
