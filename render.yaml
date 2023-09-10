@@ -6,11 +6,17 @@ services:
     healthCheckPath: /
     envVars:
       - key: POSTGRES_DB
+        envVarGroups: identity-reconciliation
       - key: POSTGRES_USER
+        envVarGroups: identity-reconciliation
       - key: POSTGRES_PASSWORD
+        envVarGroups: identity-reconciliation
       - key: POSTGRES_HOST
+        envVarGroups: identity-reconciliation
       - key: POSTGRES_PORT
+        envVarGroups: identity-reconciliation
       - key: PYTHONUNBUFFERED
+        envVarGroups: identity-reconciliation
     
   - type: web
     name: postgres
@@ -19,6 +25,10 @@ services:
     healthCheckPath: /
     envVars:
       - key: POSTGRES_DB
+        envVarGroups: identity-reconciliation
       - key: POSTGRES_USER
+        envVarGroups: identity-reconciliation
       - key: POSTGRES_PASSWORD
+        envVarGroups: identity-reconciliation
       - key: PYTHONUNBUFFERED
+        envVarGroups: identity-reconciliation
