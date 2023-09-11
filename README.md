@@ -9,7 +9,6 @@
 - Docker
 
 # Build and run service:
-- Build image: `docker compose build`
 - create volume: `docker volume create ir_psql`
 - Local run: `docker compose --env-file local.env up`
 - Prod run: `docker compose --env-file prod.env up`
