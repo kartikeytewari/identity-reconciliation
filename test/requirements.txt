@@ -1,0 +1,28 @@
+certifi==2023.5.7
+cffi==1.15.1
+charset-normalizer==3.1.0
+docutils==0.20.1
+fire==0.5.0
+idna==3.4
+mysql==0.0.3
+mysql-connector-python==8.0.32
+mysqlclient==2.1.1
+packaging @ file:///private/tmp/python-packaging-20230827-10514-1xhf2ww/packaging-23.1
+protobuf==3.20.3
+pycparser==2.21
+Pygments @ file:///private/tmp/pygments-20230806-6216-4zajry/Pygments-2.16.1
+PyQt3D==5.15.6
+PyQt5==5.15.9
+PyQt5-sip==12.12.1
+PyQtChart==5.15.6
+PyQtDataVisualization==5.15.5
+PyQtNetworkAuth==5.15.5
+PyQtPurchasing==5.15.5
+PyQtWebEngine==5.15.6
+python-dotenv==1.0.0
+PyYAML @ file:///private/tmp/pyyaml-20230718-6387-cxgeib/PyYAML-6.0.1
+QScintilla==2.14.1
+six==1.16.0
+termcolor==2.2.0
+typing_extensions @ file:///private/tmp/python-typing-extensions-20230702-5691-pqnny3/typing_extensions-4.7.1/dist/typing_extensions-4.7.1-py3-none-any.whl
+urllib3==2.0.3
