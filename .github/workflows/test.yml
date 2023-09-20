@@ -34,4 +34,9 @@ jobs:
           docker compose -f conf/docker-compose.yml up -d
       - name: Test with pytest
         run: |
-          pytest test
+          pytest test --self-contained-html --html=test/artifact/file.html 
+      - name: Upload report
+        uses: actions/upload-artifact@v3
+        with:
+          name: test_report
+          path: test/artifact/file.html
