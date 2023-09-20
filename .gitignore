@@ -263,3 +263,6 @@ pyrightconfig.json
 
 # config file
 conf/*.env
+
+# testing artifacts
+test/artifact 
