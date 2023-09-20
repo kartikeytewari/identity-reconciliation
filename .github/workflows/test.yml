@@ -31,7 +31,7 @@ jobs:
       - name: Run Server for testing 
         run: |
           docker volume create ir_psql
-          docker compose up -d
+          docker compose -f conf/docker-compose.yml up -d
       - name: Test with pytest
         run: |
           pytest test
