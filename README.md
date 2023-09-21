@@ -1,6 +1,6 @@
 # Identity Reconciliation 
 
-- Web API for identity reconciliation in customer databases. Customer's often use mutiple accounts for placing orders on a single web service. This generates siloed data for customer-aware recommendation engines. The API detect's and maintain's customer data, and reconciles such profiles based on contact information.
+- Customer's often use mutiple accounts for placing orders on a single web service. This generates siloed data for customer-aware recommendation engines. The API detect's and maintain's customer data, and reconciles such profiles based on contact information.
 
 ## Tech Stack: 
 - Python3
