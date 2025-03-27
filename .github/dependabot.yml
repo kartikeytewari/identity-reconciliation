@@ -1,0 +1,19 @@
+version: 2
+updates:
+  - package-ecosystem: "pip"
+    directory: "/server"
+    schedule:
+      interval: "daily"
+      time: "23:30"
+    open-pull-requests-limit: 10
+    commit-message:
+      prefix: "[server] dependency"
+
+  - package-ecosystem: "pip"
+    directory: "/test"
+    schedule:
+      interval: "daily"
+      time: "23:30"
+    open-pull-requests-limit: 10
+    commit-message:
+      prefix: "[test] dependency"
