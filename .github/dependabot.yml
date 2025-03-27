@@ -4,8 +4,8 @@ updates:
     directory: "/server"
     schedule:
       interval: "daily"
-      # time: "23:30"
-    # open-pull-requests-limit: 10
+      time: "23:30"
+    open-pull-requests-limit: 10
     commit-message:
       prefix: "[server] dependency"
 
@@ -13,7 +13,7 @@ updates:
     directory: "/test"
     schedule:
       interval: "daily"
-      # time: "23:30"
-    # open-pull-requests-limit: 10
+      time: "23:30"
+    open-pull-requests-limit: 10
     commit-message:
       prefix: "[test] dependency"
