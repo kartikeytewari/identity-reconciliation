@@ -13,7 +13,7 @@ mysqlclient==2.1.1
 packaging==24.2
 pip==23.3
 pluggy==1.5.0
-protobuf==3.20.3
+protobuf==6.30.2
 pycparser==2.22
 Pygments==2.16.1
 PyQt3D==5.15.6
