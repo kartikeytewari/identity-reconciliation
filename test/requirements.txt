@@ -33,7 +33,7 @@ QScintilla==2.14.1
 requests==2.32.3
 setuptools==78.1.0
 six==1.17.0
-termcolor==2.5.0
+termcolor==3.0.0
 typing_extensions==4.12.2
 urllib3==2.3.0
 wheel==0.45.1
