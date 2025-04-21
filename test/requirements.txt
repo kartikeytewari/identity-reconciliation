@@ -31,7 +31,7 @@ python-dotenv==1.1.0
 PyYAML==6.0.1
 QScintilla==2.14.1
 requests==2.32.3
-setuptools==78.1.0
+setuptools==79.0.0
 six==1.17.0
 termcolor==3.0.1
 typing_extensions==4.13.2
