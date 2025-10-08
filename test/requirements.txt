@@ -18,7 +18,7 @@ pycparser==2.22
 Pygments==2.19.2
 PyQt3D==5.15.7
 PyQt5==5.15.11
-PyQt5-sip==12.17.0
+PyQt5-sip==12.17.1
 PyQtChart==5.15.7
 PyQtDataVisualization==5.15.6
 PyQtNetworkAuth==5.15.6
