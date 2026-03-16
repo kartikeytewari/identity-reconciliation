@@ -1,6 +1,6 @@
 certifi==2026.2.25
 cffi==2.0.0
-charset-normalizer==3.4.5
+charset-normalizer==3.4.6
 docutils==0.22.4
 fire==0.7.1
 idna==3.11
